@@ -1,0 +1,3 @@
+[submodule "PaddleDetection"]
+	path = PaddleDetection
+	url = git@github.com:RedContritio/PaddleDetection.git
