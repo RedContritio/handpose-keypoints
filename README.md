@@ -24,5 +24,12 @@ annotations:
 
 ```bash
 cd ppdet
-CUDA_VISIBLE_DEVICES=6,7 python3 tools/eval.py -c configs/keypoint/tiny_handpose/tinyhandpose_256x192.yml | tee log/train_256x192.log
+python3 tools/train.py -c configs/keypoint/tiny_handpose/tinyhandpose_256x192.yml | tee log/train_256x192.log
+```
+
+## eval
+
+```bash
+cd ppdet
+python3 tools/eval.py -c configs/keypoint/tiny_handpose/tinyhandpose_256x192.yml | tee log/eval_256x192.log
 ```
