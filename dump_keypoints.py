@@ -75,13 +75,21 @@ handkeypoints_skeleton = [
 
 def wholebody2hand(whole_body_annotation) -> List[dict]:
     image_id = whole_body_annotation["image_id"]
+    bbox = whole_body_annotation["bbox"]
+    area = whole_body_annotation["area"]
     category_id = 1  # 1 for hand
 
     lefthand_valid = whole_body_annotation["lefthand_valid"]
     lefthand_kpts = whole_body_annotation["lefthand_kpts"]
+    lefthand_bbox = whole_body_annotation["lefthand_box"]
+    lx, ly, lw, lh = lefthand_bbox
+    lefthand_area = lw * lh
 
     righthand_valid = whole_body_annotation["righthand_valid"]
     righthand_kpts = whole_body_annotation["righthand_kpts"]
+    righthand_bbox = whole_body_annotation["righthand_box"]
+    rx, ry, rw, rh = righthand_bbox
+    righthand_area = rw * rh
 
     assert len(lefthand_kpts) == len(righthand_kpts)
     assert len(lefthand_kpts) == 21 * 3
@@ -94,6 +102,9 @@ def wholebody2hand(whole_body_annotation) -> List[dict]:
                 "id": -1,
                 "image_id": image_id,
                 "category_id": category_id,
+                "iscrowd": 0,
+                "bbox": lefthand_bbox,
+                "area": lefthand_area,
                 "num_keypoints": 21,
                 "keypoints": lefthand_kpts,
             }
@@ -105,6 +116,9 @@ def wholebody2hand(whole_body_annotation) -> List[dict]:
                 "id": -1,
                 "image_id": image_id,
                 "category_id": category_id,
+                "iscrowd": 0,
+                "bbox": righthand_bbox,
+                "area": righthand_area,
                 "num_keypoints": 21,
                 "keypoints": righthand_kpts,
             }
